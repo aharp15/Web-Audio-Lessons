@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+	<html>
+	
+		<head>
+			<meta charset="UTF-8">
+			<title>AUDIO LESSON 2</title>
+		</head>
+		
+	<body>
+	
+		<input type="button" id="play" >sine</input>
+		<input type="button" id="square" >square</input>
+		<input type="button" id="triangle" >triangle</input>
+		<input type="button" id="sawtooth" >sawtooth</input>
+		<input type="button" id="stop" >stop</input>
+		<input type="button" id="c" >C</input>
+		
+		
+		<script>
+		
+			function $(id){
+				return document.getElementById(id);
+			}
+				var context = new AudioContext();	
+				var o = context.createOscillator();
+				var  g = context.createGain();
+			$("play").addEventListener("click", function(){
+			
+													o.type = "sine";
+													o.connect(g);
+													g.connect(context.destination);
+													o.start(0);
+													
+													}
+												);
+			$("square").addEventListener("click", function(){
+			
+													o.type = "square";
+													o.connect(g);
+													g.connect(context.destination);
+													o.start(0);
+													
+													}
+												);
+			$("triangle").addEventListener("click", function(){
+			
+													o.type = "triangle";
+													o.connect(g);
+													g.connect(context.destination);
+													o.start(0);
+													
+													}
+												);												
+			$("sawtooth").addEventListener("click", function(){
+			
+													o.type = "sawtooth";
+													o.connect(g);
+													g.connect(context.destination);
+													o.start(0);
+													
+													}
+												);
+												
+			$("stop").addEventListener("click", function(){
+													o.stop();
+													g.gain.exponentialRampToValueAtTime(
+														0.00001, context.currentTime + 0.04
+													);
+													o.onended = function(){
+														o = context.createOscillator();
+														g = context.createGain();
+														o.connect(g);
+														g.connect(context.destination);
+													}
+			
+
+												}
+												);	
+			$("c").addEventListener("click", function(){
+												o.frequency.value = 261.6;
+												o.type = "sine";
+												o.connect(g);
+												g.connect(context.destination);
+												o.start(0);
+												g.gain.exponentialRampToValueAtTime(
+														0.00001, context.currentTime + 0.25
+													);
+												}
+												);	
+				
+			function noteC(){
+				
+				
+			}
+			
+			function stop(){
+				
+				g.gain.exponentialRampToValueAtTime(
+								0.00001, context.currentTime + 0.04
+								);
+				o.stop();
+				o = context.createOscillator();
+			}
+			
+		
+		</script>
+	
+	
+	</body>
+	
+	</html>
