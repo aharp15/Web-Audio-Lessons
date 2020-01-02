@@ -7,24 +7,59 @@
 			<title>AUDIO LESSON</title>
 			
 				<style>
-				#myCanvas{
-					border: solid 1px;
-				}
-			</style>
+					#case{
+						border: solid 1px;
+						height: 600px;
+						width: 300px;
+						background-color: black;
+					}
+					
+					#screen{
+						margin: 30px auto;
+						border: solid 1px;
+						height: 400px;
+						width: 275px;
+						background-color: white;
+					}
+					#songText{
+						margin: 50px 100px;
+					}
+					#buttons{
+						margin: 10px auto;
+						border: solid 1px;
+						height: 100px;
+						width: 200px;
+					}
+					#play{
+						margin: 30px 55px;
+						
+					}
+				</style>
 			
 		</head>
 		
-		<body>
+		<body>			
 			
-			<canvas id="myCanvas" height="500" width="600"></canvas>
+			<audio id="song" src="rise.mp3" type="audio/mpeg"></audio>
+				
+			<div id="case">
+				<div id="screen">
+					<p id="songText">No Song Playing</p>
+				</div>
+				
+				<div id="buttons">
+					<button id="play" data-playing="false" role="switch" aria-checked="false">
+						<span>Play/Pause</span>
+					</button>
+				</div>
+				
+			</div>
 			
-			<audio src="rise.mp3" type="audio/mpeg"></audio>
-						
-			<button data-playing="false" role="switch" aria-checked="false">
-				<span>Play/Pause</span>
-			</button>
 		
 		<script>
+				function $(id){
+					return document.getElementById(id);
+				}
 				////////////////////////////////////////////////////////
 				//	DO THIS IN FIREFOX
 				//	TYPE ABOUT:CONFIG 
@@ -54,6 +89,7 @@
 					if (this.dataset.playing === 'false') {
 						audioElement.play();
 						this.dataset.playing = 'true';
+						$("songText").innerHTML = $("song").src;
 					} else if (this.dataset.playing === 'true') {
 						audioElement.pause();
 						this.dataset.playing = 'false';
