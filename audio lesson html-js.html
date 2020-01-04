@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+		    <header name = "Access-Control-Allow-Origin" value = "*" /> 
+
+			<meta charset="UTF-8">
+			<title>AUDIO LESSON</title>
+			
+		</head>
+		
+		<body>			
+			
+			<audio id="song" src="rise.mp3" type="audio/mpeg"></audio>
+				
+			<div id="case">
+				<div id="screen">
+					<p id="songText">No Song Playing</p>
+				</div>
+				
+				<div id="buttons">
+					<button id="play" data-playing="false" role="switch" aria-checked="false">
+						<span>Play/Pause</span>
+					</button>
+				</div>
+				
+			</div>
+			
+			<script>
+				function $(id){
+					return document.getElementById(id);
+				}
+				////////////////////////////////////////////////////////
+				//	DO THIS IN FIREFOX
+				//	TYPE ABOUT:CONFIG 
+				//	CHANGE privacy.file_unique_origin TO FALSE
+				///////////////////////////////////////////////////////
+				const AudioContext = window.AudioContext || window.webkitAudioContext;
+				const audioContext = new AudioContext();
+				
+				const audioElement = document.querySelector('audio');
+
+				// pass it into the audio context
+				const track = audioContext.createMediaElementSource(audioElement);
+								
+								
+				const playButton = document.querySelector('button');
+
+				track.connect(audioContext.destination);
+
+				playButton.addEventListener('click', function() {
+
+					// check if context is in suspended state (autoplay policy)
+					if (audioContext.state === 'suspended') {
+						audioContext.resume();
+					}
+
+					// play or pause track depending on state
+					if (this.dataset.playing === 'false') {
+						audioElement.play();
+						this.dataset.playing = 'true';
+						$("songText").innerHTML = $("song").src;
+					} else if (this.dataset.playing === 'true') {
+						audioElement.pause();
+						this.dataset.playing = 'false';
+					}
+
+				}, false);
+
+				audioElement.addEventListener('ended', () => {
+					playButton.dataset.playing = 'false';
+				}, false);
+				
+			</script>
+		</body>
+	</html>

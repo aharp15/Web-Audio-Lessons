@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+		    <header name = "Access-Control-Allow-Origin" value = "*" /> 
+
+			<meta charset="UTF-8">
+			<title>AUDIO LESSON</title>
+			
+			<style>
+					#case{
+						border: solid 1px;
+						height: 600px;
+						width: 300px;
+						background-color: black;
+					}
+					
+					#screen{
+						margin: 30px auto;
+						border: solid 1px;
+						height: 400px;
+						width: 275px;
+						background-color: white;
+					}
+					#songText{
+						margin: 50px 100px;
+					}
+					#buttons{
+						margin: 10px auto;
+						border: solid 1px;
+						height: 100px;
+						width: 200px;
+					}
+					#play{
+						margin: 30px 55px;
+						
+					}
+				</style>
+		</head>
+		
+		<body>			
+			
+			<audio id="song" src="rise.mp3" type="audio/mpeg"></audio>
+				
+			<div id="case">
+				<div id="screen">
+					<p id="songText">No Song Playing</p>
+				</div>
+				
+				<div id="buttons">
+					<button id="play" data-playing="false" role="switch" aria-checked="false">
+						<span>Play/Pause</span>
+					</button>
+				</div>
+				
+			</div>
+			
+		</body>
+	</html>
