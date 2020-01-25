@@ -1,0 +1,49 @@
+<!DOCTYPE  html>
+	<html>
+		<head>
+			<meta charset = "UTF-8">
+			
+			<title>asdf</title>
+		
+			<script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+		
+		</head>
+		
+		
+		<body>
+		
+		<script>
+			let loopBeat;
+			
+			function setUp(){
+				bassSynth = new Tone.MembraneSynth().toMaster();
+				pluckSynth = new Tone.PluckSynth().toMaster();
+
+				loopBeat = new Tone.Loop(song, '4n');
+				
+				Tone.Transport.bpm.value = 140;
+				Tone.Transport.start();
+				
+				loopBeat.start(0);
+			}			
+			
+			function song(time){
+				
+
+				bassSynth.triggerAttackRelease('c1', '8n', time);
+				pluckSynth.triggerAttackRelease('c1', '8n', time);
+				
+	
+				console.log(time);
+				
+			}
+			
+			window.onload = function(){
+
+				setUp();
+			
+			};
+		
+		</script>
+		</body>
+	</html>
