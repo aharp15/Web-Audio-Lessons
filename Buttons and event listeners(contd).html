@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title> Buttons and Event Listeners </title>
+			
+			<script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+
+		</head>
+		
+		<body>
+		
+		
+			<div id="box">
+			
+				<p id="notes"></p>
+	
+				<div>
+					<button id="start">start</button>
+					<button id="stop">pause</button>
+					
+					<button id="A" class="notes">A</button>
+					<button id="A2" class="notes">A2</button>
+					<button id="A7" class="notes">A7</button>
+					<button id="B" class="notes">B</button>
+					<button id="C" class="notes">C</button>
+					<button id="D" class="notes">D</button>
+					<button id="E" class="notes">E</button>
+					<button id="F" class="notes">F</button>
+					<button id="G" class="notes">G</button>
+					<button id="pause" class="notes">pause</button>
+				</div>
+			
+			</div>
+			
+			
+			<style>
+				body{
+					height:100%;
+					width:100%;
+				}
+				
+				#box{
+					width: 90%;
+					height: 500px;
+					border: solid 5px;
+				}
+
+				.notes{
+					height: 100px;
+					width: 100px;
+					border-radius: 25%;
+					border: none; 
+					background-color: yellow;
+				}
+				.notes:hover{
+					box-shadow: inset 2px 2px 10px 2px gray;
+					cursor: pointer;
+				}
+			</style>
+
+
+			<script>
+			
+				function $(id){
+					return document.getElementById(id);
+				}
+				
+				// create an array of notes to be played
+				const notes = [];
+				
+				var newNote;
+				
+				var start = document.getElementById("start").addEventListener
+				("click", function(){
+						// create a synth
+						const synth = new Tone.MembraneSynth().toMaster();
+						
+						// create a new sequence with the synth and notes
+						const synthPart = new Tone.Sequence(
+						  function(time, note) {
+							console.log(note);
+							synth.triggerAttackRelease(note, "10hz", time);
+						  },
+						  notes,
+						  "10n"
+						);
+						// Setup the synth to be ready to play on beat 5
+						synthPart.start();
+						// Note that if you pass a time into the start method 
+						// you can specify when the synth part starts 
+						// e.g. .start('8n') will start after 5 eighth note
+						// start the transport which controls the main timeline
+						Tone.Transport.start();									
+																								
+				});
+														
+				var stop = document.getElementById("stop").addEventListener
+				(
+					"click", function(){
+					Tone.Transport.stop();
+					
+					}
+				);
+				
+				var A = $("A").addEventListener("click", function(){
+															newNote = "A1";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;
+														});
+				var A_two = $("A2").addEventListener("click", function(){
+															newNote = "A2";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;
+														});
+				var A_two = $("A7").addEventListener("click", function(){
+															newNote = "A7";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;
+														});
+				var B = $("B").addEventListener("click", function(){
+															newNote = "B1";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;
+														});
+				var C = $("C").addEventListener("click", function(){
+															newNote = "C1";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;
+														});
+														
+				var D = $("D").addEventListener("click", function(){
+															newNote = "D1";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;														
+														});
+				var E = $("E").addEventListener("click", function(){
+															newNote = "E1";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;															
+														});
+				var F = $("F").addEventListener("click", function(){
+															newNote = "F1";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;															
+														});
+				var G = $("G").addEventListener("click", function(){
+															newNote = "G1";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;															
+														});
+				var pause = $("pause").addEventListener("click", function(){
+															newNote = "null";
+															notes.push(newNote);
+															$("notes").innerHTML += newNote;															
+														});
+			
+				
+			</script>
+		</body>
+	</html>
+		
